@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <style>
+  .watch {
+    width: 500px;
+    height: 500px;
+  }
+  .round {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: rgb(17, 17, 17);
+    position: relative;
+    border-color: gray;
+    border-style: solid;
+    border-width: 10px;
+  }
+  .center-circle {
+    width: 5%;
+    height: 5%;
+    background-color: rgb(254, 195, 5);
+    border-radius: 50%;
+  }
+  .tail {
+    height: 250%;
+    width: 10%;
+    border-radius: 25%;
+    background-color: rgb(254, 195, 5);
+    margin-left: -10%;
+    margin-top: -1.5%;
+  }
+  .arm-second {
+    width: 45%;
+    height: 1%;
+    background-color: rgb(254, 195, 5);
+    transform-origin: 0 50%;
+  }
+  .arm-hour {
+    width: 30%;
+    height: 1.5%;
+    background-color: white;
+    transform-origin: 0 50%;
+    margin-top: -.30%;
+  }
+  .arm-minute {
+    width: 40%;
+    height: 1.25%;
+    background-color: white;
+    transform-origin: 0 50%;
+    margin-top: -.30%;
+  }
+  </style>
+  <script>
+  $(function() {
+    function centerCircle() {
+      var c = $(".center-circle");
+      c.css("position", "absolute");
+      c.css("top", Math.max(0, (c.parent().height() - c.outerHeight()) / 2));
+      c.css("left", Math.max(0, (c.parent().width() - c.outerWidth()) / 2));
+    }
+    function centerArm(arm) {
+      var c = arm;
+      c.css("position", "absolute");
+      c.css("top", Math.max(0, (c.parent().height() - c.height() / 2) / 2));
+      c.css("left", Math.max(0, (c.parent().width()) / 2));
+    }
+    $(window).on("resize", function() {
+      centerCircle();
+      centerArm($(".arm-second"));
+      centerArm($(".arm-minute"));
+      centerArm($(".arm-hour"));
+    });
+    centerCircle();
+    centerArm($(".arm-second"));
+    centerArm($(".arm-minute"));
+    centerArm($(".arm-hour"));
+
+    function rotateSeconds() {
+      var c = $(".arm-second");
+      var d = new Date();
+      var seconds = d.getSeconds() + d.getMilliseconds() / 1000;
+      c.css("transform", "rotate(" + ((seconds / 60 *360) - 90) + "deg)");
+    }
+    function rotateHours() {
+      var c = $(".arm-hour");
+      var d = new Date();
+      var seconds = d.getHours() + d.getMinutes() / 60;
+      c.css("transform", "rotate(" + ((seconds / 24 *360) + 90) + "deg)");
+    }
+    function rotateMinutes() {
+      var c = $(".arm-minute");
+      var d = new Date();
+      var seconds = d.getMinutes() + d.getSeconds() / 60;
+      c.css("transform", "rotate(" + ((seconds / 60 *360) - 90) + "deg)");
+    }
+    setInterval(rotateSeconds, 10);
+    setInterval(rotateMinutes, 10);
+    setInterval(rotateHours, 10);
+    rotateSeconds();
+    rotateMinutes();
+    rotateHours();
+  });
+  </script>
+</head>
+<body>
+  <div class="watch">
+    <div class="round">
+      <div class="arm-hour"></div>
+      <div class="arm-minute"></div>
+      <div class="arm-second">
+        <div class="tail"></div>
+      </div>
+      <div class="center-circle"></div>
+    </div>
+  </div>
+</body>
+</html>
