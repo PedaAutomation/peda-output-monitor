@@ -13,8 +13,9 @@
     height: 100%;
     border-radius: 50%;
     background-color: rgb(17, 17, 17);
+    background-image: url(http://subtlepatterns.com/patterns/txture.png);
     position: relative;
-    border-color: gray;
+    border-color: rgb(75, 75, 75);
     border-style: solid;
     border-width: 10px;
   }
@@ -72,10 +73,10 @@
     outline: 1px solid transparent;
   }
   .arm-inner {
-    width: 65%;
-    height: 50%;
-    margin-left: 32.5%;
-    background-color: rgb(150, 150, 150);
+    width: 60%;
+    height: 30%;
+    margin-left: 37.5%;
+    background-color: rgb(190, 190, 190);
   }
   .sec {
     position: absolute;
@@ -176,9 +177,9 @@
       var minutes = d.getMinutes() + d.getSeconds() / 60;
       c.css("transform", "rotateZ(" + ((minutes / 60 * 360) - 90) + "deg)");
     }
-    setInterval(rotateSeconds, 500);
-    setInterval(rotateMinutes, 500);
-    setInterval(rotateHours, 500);
+    setInterval(rotateSeconds, 50);
+    setInterval(rotateMinutes, 50);
+    setInterval(rotateHours, 50);
     rotateSeconds();
     rotateMinutes();
     rotateHours();
